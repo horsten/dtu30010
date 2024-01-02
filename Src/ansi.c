@@ -117,10 +117,10 @@ typedef struct {
 	const char *bl;
 	const char *h;
 	const char *v;
-	int fgcol;
-	int bgcol;
-	int titlefg;
-	int titlebg;
+	uint8_t fgcol;
+	uint8_t bgcol;
+	uint8_t titlefg;
+	uint8_t titlebg;
 } window_style_t;
 
 static const window_style_t window_styles[] = {
