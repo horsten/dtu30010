@@ -1,0 +1,10 @@
+../Src/ansi.c:12:6:fgcolor	24	static
+../Src/ansi.c:33:6:bgcolor	16	static
+../Src/ansi.c:56:6:color	24	static
+../Src/ansi.c:67:6:resetbgcolor	8	static
+../Src/ansi.c:73:6:clrscr	8	static
+../Src/ansi.c:78:6:underline	16	static
+../Src/ansi.c:83:6:blink	16	static
+../Src/ansi.c:88:6:inverse	16	static
+../Src/ansi.c:93:6:gotoxy	16	static
+../Src/ansi.c:131:6:window	56	dynamic

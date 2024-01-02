@@ -1,0 +1,2 @@
+../Src/system_stm32f30x.c:169:6:SystemInit	0	static
+../Src/system_stm32f30x.c:248:6:SystemCoreClockUpdate	0	static

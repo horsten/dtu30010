@@ -1,0 +1,15 @@
+../SPL/src/stm32f30x_opamp.c:144:6:OPAMP_DeInit	16	static
+../SPL/src/stm32f30x_opamp.c:164:6:OPAMP_Init	24	static
+../SPL/src/stm32f30x_opamp.c:192:6:OPAMP_StructInit	16	static
+../SPL/src/stm32f30x_opamp.c:209:6:OPAMP_PGAConfig	24	static
+../SPL/src/stm32f30x_opamp.c:239:6:OPAMP_VrefConfig	24	static
+../SPL/src/stm32f30x_opamp.c:271:6:OPAMP_VrefConnectNonInvertingInput	16	static
+../SPL/src/stm32f30x_opamp.c:297:6:OPAMP_VrefConnectADCCmd	16	static
+../SPL/src/stm32f30x_opamp.c:331:6:OPAMP_TimerControlledMuxConfig	24	static
+../SPL/src/stm32f30x_opamp.c:364:6:OPAMP_TimerControlledMuxCmd	16	static
+../SPL/src/stm32f30x_opamp.c:393:6:OPAMP_Cmd	16	static
+../SPL/src/stm32f30x_opamp.c:424:10:OPAMP_GetOutputLevel	24	static
+../SPL/src/stm32f30x_opamp.c:458:6:OPAMP_OffsetTrimModeSelect	16	static
+../SPL/src/stm32f30x_opamp.c:484:6:OPAMP_OffsetTrimConfig	32	static
+../SPL/src/stm32f30x_opamp.c:517:6:OPAMP_StartCalibration	16	static
+../SPL/src/stm32f30x_opamp.c:562:6:OPAMP_LockConfig	16	static

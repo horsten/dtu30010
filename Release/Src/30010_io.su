@@ -1,0 +1,11 @@
+../Src/30010_io.c:11:9:uart_get_char	0	static
+../Src/30010_io.c:20:6:uart_put_char	8	static
+../Src/30010_io.c:25:5:_write_r	16	static
+../Src/30010_io.c:38:6:USART2_IRQHandler	8	static
+../Src/30010_io.c:51:6:uart_clear	0	static
+../Src/30010_io.c:57:9:uart_get_count	0	static
+../Src/30010_io.c:61:6:uart_init	80	static
+../Src/30010_io.c:132:6:lcd_transmit_byte	8	static
+../Src/30010_io.c:140:6:lcd_push_buffer	16	static
+../Src/30010_io.c:189:6:lcd_reset	8	static,ignoring_inline_asm
+../Src/30010_io.c:220:6:lcd_init	0	static

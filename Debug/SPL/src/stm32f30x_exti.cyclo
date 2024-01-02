@@ -1,0 +1,8 @@
+../SPL/src/stm32f30x_exti.c:124:6:EXTI_DeInit	1
+../SPL/src/stm32f30x_exti.c:154:6:EXTI_Init	3
+../SPL/src/stm32f30x_exti.c:213:6:EXTI_StructInit	1
+../SPL/src/stm32f30x_exti.c:228:6:EXTI_GenerateSWInterrupt	1
+../SPL/src/stm32f30x_exti.c:262:12:EXTI_GetFlagStatus	2
+../SPL/src/stm32f30x_exti.c:286:6:EXTI_ClearFlag	1
+../SPL/src/stm32f30x_exti.c:300:10:EXTI_GetITStatus	3
+../SPL/src/stm32f30x_exti.c:328:6:EXTI_ClearITPendingBit	1

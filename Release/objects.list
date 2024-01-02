@@ -1,0 +1,7 @@
+"./Src/30010_io.o"
+"./Src/ansi.o"
+"./Src/main.o"
+"./Src/syscalls.o"
+"./Src/sysmem.o"
+"./Src/system_stm32f30x.o"
+"./Startup/startup_stm32f302r8tx.o"

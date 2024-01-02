@@ -1,0 +1,8 @@
+../SPL/src/stm32f30x_comp.c:213:6:COMP_DeInit	16	static
+../SPL/src/stm32f30x_comp.c:241:6:COMP_Init	24	static
+../SPL/src/stm32f30x_comp.c:283:6:COMP_StructInit	16	static
+../SPL/src/stm32f30x_comp.c:310:6:COMP_Cmd	16	static
+../SPL/src/stm32f30x_comp.c:340:6:COMP_SwitchCmd	16	static
+../SPL/src/stm32f30x_comp.c:376:10:COMP_GetOutputLevel	24	static
+../SPL/src/stm32f30x_comp.c:433:6:COMP_WindowCmd	16	static
+../SPL/src/stm32f30x_comp.c:478:6:COMP_LockConfig	16	static

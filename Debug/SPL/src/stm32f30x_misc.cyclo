@@ -1,0 +1,5 @@
+../SPL/src/stm32f30x_misc.c:100:6:NVIC_PriorityGroupConfig	1
+../SPL/src/stm32f30x_misc.c:118:6:NVIC_Init	2
+../SPL/src/stm32f30x_misc.c:161:6:NVIC_SetVectorTable	1
+../SPL/src/stm32f30x_misc.c:180:6:NVIC_SystemLPConfig	2
+../SPL/src/stm32f30x_misc.c:204:6:SysTick_CLKSourceConfig	2

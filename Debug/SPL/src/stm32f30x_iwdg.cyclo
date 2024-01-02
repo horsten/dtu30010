@@ -1,0 +1,7 @@
+../SPL/src/stm32f30x_iwdg.c:140:6:IWDG_WriteAccessCmd	1
+../SPL/src/stm32f30x_iwdg.c:160:6:IWDG_SetPrescaler	1
+../SPL/src/stm32f30x_iwdg.c:173:6:IWDG_SetReload	1
+../SPL/src/stm32f30x_iwdg.c:186:6:IWDG_ReloadCounter	1
+../SPL/src/stm32f30x_iwdg.c:197:6:IWDG_SetWindowValue	1
+../SPL/src/stm32f30x_iwdg.c:225:6:IWDG_Enable	1
+../SPL/src/stm32f30x_iwdg.c:255:12:IWDG_GetFlagStatus	2

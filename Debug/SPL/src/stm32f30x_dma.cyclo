@@ -1,0 +1,11 @@
+../SPL/src/stm32f30x_dma.c:141:6:DMA_DeInit	13
+../SPL/src/stm32f30x_dma.c:235:6:DMA_Init	1
+../SPL/src/stm32f30x_dma.c:293:6:DMA_StructInit	1
+../SPL/src/stm32f30x_dma.c:328:6:DMA_Cmd	2
+../SPL/src/stm32f30x_dma.c:387:6:DMA_SetCurrDataCounter	1
+../SPL/src/stm32f30x_dma.c:405:10:DMA_GetCurrDataCounter	1
+../SPL/src/stm32f30x_dma.c:481:6:DMA_ITConfig	2
+../SPL/src/stm32f30x_dma.c:561:12:DMA_GetFlagStatus	3
+../SPL/src/stm32f30x_dma.c:657:6:DMA_ClearFlag	2
+../SPL/src/stm32f30x_dma.c:736:10:DMA_GetITStatus	3
+../SPL/src/stm32f30x_dma.c:832:6:DMA_ClearITPendingBit	2

@@ -1,0 +1,10 @@
+../SPL/src/stm32f30x_pwr.c:100:6:PWR_DeInit	8	static
+../SPL/src/stm32f30x_pwr.c:114:6:PWR_BackupAccessCmd	16	static
+../SPL/src/stm32f30x_pwr.c:158:6:PWR_PVDLevelConfig	24	static
+../SPL/src/stm32f30x_pwr.c:183:6:PWR_PVDCmd	16	static
+../SPL/src/stm32f30x_pwr.c:219:6:PWR_WakeUpPinCmd	16	static
+../SPL/src/stm32f30x_pwr.c:351:6:PWR_EnterSleepMode	16	static,ignoring_inline_asm
+../SPL/src/stm32f30x_pwr.c:391:6:PWR_EnterSTOPMode	24	static,ignoring_inline_asm
+../SPL/src/stm32f30x_pwr.c:438:6:PWR_EnterSTANDBYMode	4	static,ignoring_inline_asm
+../SPL/src/stm32f30x_pwr.c:488:12:PWR_GetFlagStatus	24	static
+../SPL/src/stm32f30x_pwr.c:514:6:PWR_ClearFlag	16	static

@@ -1,0 +1,4 @@
+../Src/ansi.c:6:6:fgcolor	2
+../Src/ansi.c:26:6:bgcolor	1
+../Src/ansi.c:48:6:color	2
+../Src/ansi.c:58:6:resetbgcolor	1

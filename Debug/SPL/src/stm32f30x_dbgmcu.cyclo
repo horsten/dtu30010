@@ -1,0 +1,5 @@
+../SPL/src/stm32f30x_dbgmcu.c:73:10:DBGMCU_GetREVID	1
+../SPL/src/stm32f30x_dbgmcu.c:83:10:DBGMCU_GetDEVID	1
+../SPL/src/stm32f30x_dbgmcu.c:115:6:DBGMCU_Config	2
+../SPL/src/stm32f30x_dbgmcu.c:152:6:DBGMCU_APB1PeriphConfig	2
+../SPL/src/stm32f30x_dbgmcu.c:181:6:DBGMCU_APB2PeriphConfig	2
