@@ -68,7 +68,6 @@ static const fixed16_14_t sinetable[] = {
     0xf9bb, 0xfa83, 0xfb4b, 0xfc14, 0xfcdd, 0xfda5, 0xfe6e, 0xff37
 };
 
-
 const char *print_fixed32_16_t(fixed32_16_t i) {
 	static char buf[4][16];
 	static uint8_t buf_in_use = 0;
@@ -109,33 +108,11 @@ fixed32_16_t cos_fp_32_16(uint16_t degree_base_512)
 
 void vector_rotate(vector_t *v, uint16_t degree_base_512)
 {
-	printf("------ ROTATE ------\nOld X: %s Old Y: %s \"Degrees\": %d\n",
-			print_fixed32_16_t(v->x), print_fixed32_16_t(v->y), degree_base_512);
-	fixed32_16_t s_val, c_val, x_times_cos, x_times_sin, y_times_cos, y_times_sin, new_x, new_y;
-	s_val = sin_fp_32_16(degree_base_512);
-	c_val = cos_fp_32_16(degree_base_512);
+	fixed32_16_t sin_val = sin_fp_32_16(degree_base_512);
+	fixed32_16_t cos_val = cos_fp_32_16(degree_base_512);
 
-	printf("sin(%d) = %s, cos(%d) = %s\n",
-			degree_base_512, print_fixed32_16_t(s_val),
-			degree_base_512, print_fixed32_16_t(c_val));
-
-	x_times_cos = fixed32_16_mul(v->x, c_val);
-	x_times_sin = fixed32_16_mul(v->x, s_val);
-	y_times_cos = fixed32_16_mul(v->y, c_val);
-	y_times_sin = fixed32_16_mul(v->y, s_val);
-
-	printf("x*cos: %s x*sin: %s y*cos: %s x*sin: %s\n",
-			print_fixed32_16_t(x_times_cos), print_fixed32_16_t(x_times_sin),
-			print_fixed32_16_t(y_times_cos), print_fixed32_16_t(y_times_sin));
-
-	new_x = x_times_cos - y_times_sin;
-	new_y = x_times_sin + y_times_cos;
-
-	printf("New x: %s New y: %s\n",
-			print_fixed32_16_t(new_x), print_fixed32_16_t(new_y));
-
-	v->x = new_x;
-	v->y = new_y;
+	v->x = fixed32_16_mul(v->x, cos_val) - fixed32_16_mul(v->y, sin_val);
+	v->y = fixed32_16_mul(v->x, sin_val) + fixed32_16_mul(v->y, cos_val);
 }
 
 void test_fp_sincos(void)
