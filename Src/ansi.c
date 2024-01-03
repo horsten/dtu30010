@@ -124,7 +124,7 @@ typedef struct {
 } window_style_t;
 
 static const window_style_t window_styles[] = {
-		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=15, .bgcol=4, .titlefg=11, .titlebg=7},
+		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=15, .bgcol=4, .titlefg=0, .titlebg=7},
 		{ .tl=L_TL_D, .tr=L_TR_D, .bl=L_BL_D, .br=L_BR_D, .h=L_H_D, .v=L_V_D, .fgcol=0, .bgcol=7, .titlefg=15, .titlebg=1 }
 };
 
@@ -145,10 +145,13 @@ void window(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t style, const
 			title_len = 0;
 		}
 	}
-	if (title_len > 0) {
+	if (title_len > 1) {
 		titlebuf = alloca(title_len+1);
 		strncpy(titlebuf, title, title_len);
+		titlebuf[title_len-1]='\xaf';
 		titlebuf[title_len]='\0';
+	} else {
+		title_len = 0;
 	}
 	gotoxy(x1,y1);
 	color(st->fgcol, st->bgcol);
