@@ -72,7 +72,7 @@ void resetbgcolor()
 
 void clrscr()
 {
-	printf(ESC "[2J");
+	printf(ESC "[H" ESC "[2J");
 }
 
 void underline(uint8_t on)

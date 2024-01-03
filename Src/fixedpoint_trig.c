@@ -1,7 +1,7 @@
 #include "fixedpoint_trig.h"
 #include <stdio.h>
 
-static const fixed16_14 sinetable[] = {
+static const fixed16_14_t sinetable[] = {
     0x0000, 0x00c9, 0x0192, 0x025b, 0x0323, 0x03ec, 0x04b5, 0x057d,
     0x0645, 0x070d, 0x07d5, 0x089c, 0x0964, 0x0a2a, 0x0af1, 0x0bb6,
     0x0c7c, 0x0d41, 0x0e05, 0x0ec9, 0x0f8c, 0x104f, 0x1111, 0x11d3,
@@ -69,53 +69,120 @@ static const fixed16_14 sinetable[] = {
 };
 
 
-const char *print_fixed32_16(fixed32_16 i) {
-	static char buf[16];
+const char *print_fixed32_16_t(fixed32_16_t i) {
+	static char buf[4][16];
+	static uint8_t buf_in_use = 0;
 	int negative = 0;
 	// Prints a signed 16.16 fixed point number
 	if ((i & 0x80000000) != 0) { // Handle negative numbers
 		negative = 1;
 		i = ~i + 1;
 	}
-	sprintf(buf, "%s%ld.%04ld", negative ? "-" : "", i >> 16, 10000 * (uint32_t)(i & 0xFFFF) >> 16);
-	return (const char *)buf;
+	// rotate through 4 buffers so we can have up to 4 uses in a single printf call...
+	// bit quick and dirty but it works.
+	if (buf_in_use > 3) {
+		buf_in_use = 0;
+	}
+	sprintf(buf[buf_in_use], "%s%ld.%04ld", negative ? "-" : "", i >> 16, 10000 * (uint32_t)(i & 0xFFFF) >> 16);
+	return (const char *)&(buf[buf_in_use++]);
 }
 
-fixed16_14 sin_fp(uint16_t degree_base_512)
+fixed16_14_t sin_fp(uint16_t degree_base_512)
 {
 	return sinetable[degree_base_512 % 512];
 }
 
-fixed16_14 cos_fp(uint16_t degree_base_512)
+fixed32_16_t sin_fp_32_16(uint16_t degree_base_512)
+{
+	return fixed16_14_to_fixed32_16(sinetable[degree_base_512 % 512]);
+}
+
+fixed16_14_t cos_fp(uint16_t degree_base_512)
 {
 	return sinetable[(degree_base_512 + 128) % 512];
 }
 
+fixed32_16_t cos_fp_32_16(uint16_t degree_base_512)
+{
+	return  fixed16_14_to_fixed32_16(sinetable[(degree_base_512 + 128) % 512]);
+}
+
+void vector_rotate(vector_t *v, uint16_t degree_base_512)
+{
+	printf("------ ROTATE ------\nOld X: %s Old Y: %s \"Degrees\": %d\n",
+			print_fixed32_16_t(v->x), print_fixed32_16_t(v->y), degree_base_512);
+	fixed32_16_t s_val, c_val, x_times_cos, x_times_sin, y_times_cos, y_times_sin, new_x, new_y;
+	s_val = sin_fp_32_16(degree_base_512);
+	c_val = cos_fp_32_16(degree_base_512);
+
+	printf("sin(%d) = %s, cos(%d) = %s\n",
+			degree_base_512, print_fixed32_16_t(s_val),
+			degree_base_512, print_fixed32_16_t(c_val));
+
+	x_times_cos = fixed32_16_mul(v->x, c_val);
+	x_times_sin = fixed32_16_mul(v->x, s_val);
+	y_times_cos = fixed32_16_mul(v->y, c_val);
+	y_times_sin = fixed32_16_mul(v->y, s_val);
+
+	printf("x*cos: %s x*sin: %s y*cos: %s x*sin: %s\n",
+			print_fixed32_16_t(x_times_cos), print_fixed32_16_t(x_times_sin),
+			print_fixed32_16_t(y_times_cos), print_fixed32_16_t(y_times_sin));
+
+	new_x = x_times_cos - y_times_sin;
+	new_y = x_times_sin + y_times_cos;
+
+	printf("New x: %s New y: %s\n",
+			print_fixed32_16_t(new_x), print_fixed32_16_t(new_y));
+
+	v->x = new_x;
+	v->y = new_y;
+}
+
 void test_fp_sincos(void)
 {
-	fixed16_14 v;
-	v = sin_fp(0);
-	printf("sin_fp(0) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	fixed16_14_t val;
+	goto part2;
+	val = sin_fp(0);
+	printf("sin_fp(0) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = sin_fp(64 /* 45/360*512*/);
-	printf("sin_fp(45 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = sin_fp(64 /* 45/360*512*/);
+	printf("sin_fp(45 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = sin_fp(401 /* (-78+360)/360*512 */);
-	printf("sin_fp(-78 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = sin_fp(401 /* (-78+360)/360*512 */);
+	printf("sin_fp(-78 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = sin_fp(411 /* (649-360)/360*512 */);
-	printf("sin_fp(649 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = sin_fp(411 /* (649-360)/360*512 */);
+	printf("sin_fp(649 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = cos_fp(0);
-	printf("cos_fp(0) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = cos_fp(0);
+	printf("cos_fp(0) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = cos_fp(64 /* 45/360*512*/);
-	printf("cos_fp(45 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = cos_fp(64 /* 45/360*512*/);
+	printf("cos_fp(45 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = cos_fp(401 /* (-78+360)/360*512 */);
-	printf("cos_fp(-78 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = cos_fp(401 /* (-78+360)/360*512 */);
+	printf("cos_fp(-78 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	v = cos_fp(411 /* (649-360)/360*512 */);
-	printf("cos_fp(649 degrees) = %s\n", print_fixed32_16(fixed16_14_to_fixed32_16(v)));
+	val = cos_fp(411 /* (649-360)/360*512 */);
+	printf("cos_fp(649 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
+	part2:
+	vector_t vec = { int16_to_fixed32_16(1), int16_to_fixed32_16(2) };
+	vector_rotate(&vec, 256 /* 180 degrees: 180/360*512 or 512/2 for short */);
+	printf("vector_rotate(1, 2, 180 degrees): (%s, %s)\n", print_fixed32_16_t(vec.x), print_fixed32_16_t(vec.y));
+
+	vec.x = int16_to_fixed32_16(6);
+	vec.y = int16_to_fixed32_16(4);
+	vector_rotate(&vec, 498 /* -10 degrees */);
+	printf("vector_rotate(6, 4, -10 degrees): (%s, %s)\n", print_fixed32_16_t(vec.x), print_fixed32_16_t(vec.y));
+
+	vec.x = int16_to_fixed32_16(-4);
+	vec.y = int16_to_fixed32_16(-4);
+	vector_rotate(&vec, 256/* 900 degrees = 180 degrees = 256 BongDegrees */);
+	printf("vector_rotate(-4, -4, 900 degrees): (%s, %s)\n", print_fixed32_16_t(vec.x), print_fixed32_16_t(vec.y));
+
+	vec.x = int16_to_fixed32_16(-4);
+	vec.y = int16_to_fixed32_16(2);
+	vector_rotate(&vec, 462 /* -35 degrees */);
+	printf("vector_rotate(-4, 2, -35 degrees): (%s, %s)\n", print_fixed32_16_t(vec.x), print_fixed32_16_t(vec.y));
 }

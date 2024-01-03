@@ -15,11 +15,11 @@ int main(void)
 	window(2,2,60,15,0,"Hello World!");
 	window(10,5,40,20,0,"Win2: Title Too Long To Fit In Title Bar Of Window");
 	window(20,12,60,16,1,"Win3: Alt Style");
-#endif
-
+#else
 	color(7,0);
 	clrscr();
 	test_fp_sincos();
+#endif
 
 	for(;;);
 }
