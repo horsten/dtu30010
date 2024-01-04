@@ -73,7 +73,7 @@ static void bounce(playfield_t *pf)
 		}
 
 		// Wait for a bit
-		usleep(100000);
+		usleep(50000);
 
 		// Now delete the ball from the old position
 		if (!obscured) {
@@ -88,14 +88,14 @@ static void bounce(playfield_t *pf)
 		newy = round_fixed32_16(b.p.y);
 
 		// Check for collission with walls
-		if (newx<0 || newx >= pf->xsize) {
+		if (newx<=0 || newx >= pf->xsize-1) {
 			b.v.x = -b.v.x;
 			update_pos(&b);
 			newx = round_fixed32_16(b.p.x);
 			newy = round_fixed32_16(b.p.y);
 			hits++;
 		}
-		if (newy < 0 || newy >= pf->ysize) {
+		if (newy<=0 || newy >= pf->ysize-1) {
 			b.v.y = -b.v.y;
 			update_pos(&b);
 			newx = round_fixed32_16(b.p.x);
