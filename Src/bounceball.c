@@ -122,7 +122,7 @@ void bounceball(void)
 	pf.status_y = pf.ysize >> 1;
 	printf(" Playfield size: %dx%d. Let's Bounce!", pf.xsize, pf.ysize);
 	hide_cursor(1);
-	window(pf.xoffset-1,pf.yoffset-1,pf.xsize+2,pf.ysize+2,3,NULL);
-	window(pf.xoffset+pf.status_x-2,pf.yoffset+pf.status_y-1,14,3,4,NULL);
+	window(pf.xoffset-1,pf.yoffset-1,pf.xsize+2,pf.ysize+2,2,NULL);
+	window(pf.xoffset+pf.status_x-2,pf.yoffset+pf.status_y-1,14,3,3,NULL);
 	bounce(&pf);
 }

@@ -209,8 +209,8 @@ typedef struct {
 static const window_style_t window_styles[] = {
 		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=15, .bgcol=4, .titlefg=0, .titlebg=7},
 		{ .tl=L_TL_D, .tr=L_TR_D, .bl=L_BL_D, .br=L_BR_D, .h=L_H_D, .v=L_V_D, .fgcol=0, .bgcol=7, .titlefg=15, .titlebg=1 },
-		{ .tl=L_TL_D, .tr=L_TR_D, .bl=L_BL_D, .br=L_BR_D, .h=L_H_D, .v=L_V_D, .fgcol=15, .bgcol=4, .no_title=1 },
-		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=0, .bgcol=7, .no_title=1 }
+		{ .tl=L_TL_D, .tr=L_TR_D, .bl=L_BL_D, .br=L_BR_D, .h=L_H_D, .v=L_V_D, .fgcol=0, .bgcol=7, .no_title=1 },
+		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=15, .bgcol=4, .no_title=1 }
 };
 
 void window(uint16_t x1, uint16_t y1, uint16_t width, uint16_t height, uint8_t style, const char *title)
