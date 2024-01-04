@@ -7,6 +7,8 @@
 C_SRCS += \
 ../Src/30010_io.c \
 ../Src/ansi.c \
+../Src/bounceball.c \
+../Src/fixedpoint_trig.c \
 ../Src/main.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
@@ -15,6 +17,8 @@ C_SRCS += \
 OBJS += \
 ./Src/30010_io.o \
 ./Src/ansi.o \
+./Src/bounceball.o \
+./Src/fixedpoint_trig.o \
 ./Src/main.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
@@ -23,6 +27,8 @@ OBJS += \
 C_DEPS += \
 ./Src/30010_io.d \
 ./Src/ansi.d \
+./Src/bounceball.d \
+./Src/fixedpoint_trig.d \
 ./Src/main.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
@@ -36,7 +42,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/30010_io.cyclo ./Src/30010_io.d ./Src/30010_io.o ./Src/30010_io.su ./Src/ansi.cyclo ./Src/ansi.d ./Src/ansi.o ./Src/ansi.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32f30x.cyclo ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o ./Src/system_stm32f30x.su
+	-$(RM) ./Src/30010_io.cyclo ./Src/30010_io.d ./Src/30010_io.o ./Src/30010_io.su ./Src/ansi.cyclo ./Src/ansi.d ./Src/ansi.o ./Src/ansi.su ./Src/bounceball.cyclo ./Src/bounceball.d ./Src/bounceball.o ./Src/bounceball.su ./Src/fixedpoint_trig.cyclo ./Src/fixedpoint_trig.d ./Src/fixedpoint_trig.o ./Src/fixedpoint_trig.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/system_stm32f30x.cyclo ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o ./Src/system_stm32f30x.su
 
 .PHONY: clean-Src
 

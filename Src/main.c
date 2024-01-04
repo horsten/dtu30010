@@ -2,20 +2,23 @@
 #include "30010_io.h" // Input/output library for this course
 #include "ansi.h"
 #include "fixedpoint_trig.h"
+#include "bounceball.h"
 
 int main(void)
 {
 
 // Setup communication with the PC
 	uart_init(460800);
-	color(7,0);
-	clrscr();
+	init_term();
 
-#if 0
-	window(2,2,60,15,0,"Hello World!");
-	window(10,5,40,20,0,"Win2: Title Too Long To Fit In Title Bar Of Window");
-	window(20,12,60,16,1,"Win3: Alt Style");
-#else
+#if 1
+	bounceball();
+#elif 0
+	window(1,1,60,15,0,"Hello World!");
+	window(9,4,40,20,0,"Win2: Title Too Long To Fit In Title Bar Of Window");
+	window(9,11,60,16,1,"Win3: Alt Style");
+	window(29,14,50,26,2,"Notitle");
+#elif 0
 	color(7,0);
 	clrscr();
 	test_fp_sincos();

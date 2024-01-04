@@ -29,7 +29,9 @@ Src/main.o: ../Src/main.c C:/Users/th/src/stm/ex0102/Inc/stm32f30x_conf.h \
  C:/Users/th/src/stm/ex0102/SPL/inc/stm32f30x_wwdg.h \
  C:/Users/th/src/stm/ex0102/SPL/inc/stm32f30x_misc.h \
  C:/Users/th/src/stm/ex0102/Inc/30010_io.h \
- C:/Users/th/src/stm/ex0102/Inc/ansi.h
+ C:/Users/th/src/stm/ex0102/Inc/ansi.h \
+ C:/Users/th/src/stm/ex0102/Inc/fixedpoint_trig.h \
+ C:/Users/th/src/stm/ex0102/Inc/bounceball.h
 C:/Users/th/src/stm/ex0102/Inc/stm32f30x_conf.h:
 C:/Users/th/src/stm/ex0102/SPL/inc/stm32f30x_adc.h:
 C:/Users/th/src/stm/ex0102/Inc/stm32f30x.h:
@@ -62,3 +64,5 @@ C:/Users/th/src/stm/ex0102/SPL/inc/stm32f30x_wwdg.h:
 C:/Users/th/src/stm/ex0102/SPL/inc/stm32f30x_misc.h:
 C:/Users/th/src/stm/ex0102/Inc/30010_io.h:
 C:/Users/th/src/stm/ex0102/Inc/ansi.h:
+C:/Users/th/src/stm/ex0102/Inc/fixedpoint_trig.h:
+C:/Users/th/src/stm/ex0102/Inc/bounceball.h:

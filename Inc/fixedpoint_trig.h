@@ -21,6 +21,11 @@ inline __attribute__((always_inline)) fixed32_16_t fixed32_16_mul(fixed32_16_t x
 	return (int64_t)(x * (int64_t)(y) << 16) >> 32;
 }
 
+inline  __attribute__((always_inline)) int16_t round_fixed32_16(fixed32_16_t v)
+{
+	return (v >> 16) + ((v >> 15) & 1);
+}
+
 // Warning: not reentrant, uses static buffer.
 const char *print_fixed32_16_t(fixed32_16_t i);
 
