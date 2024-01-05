@@ -1,5 +1,6 @@
 #include "joystick.h"
 #include "30010_io.h"
+#include "rgb_led.h"
 #include <stdint.h>
 
 uint8_t read_joystick(void)
@@ -54,6 +55,35 @@ void test_joystick(void)
 					(v_new >> 2) & 1,
 					(v_new >> 3) & 1,
 					(v_new >> 4) & 1);
+		}
+		v_old = v_new;
+	};
+}
+
+void test_joystick_with_rgb_led(void)
+{
+	uint8_t v_old=0xff, v_new;
+	init_joystick();
+	init_rgb_led();
+	while(1) {
+		v_new = read_joystick();
+		if (v_new != v_old) {
+			// Set the LED depending on joystick state,
+			// by choosing these values it's possible to get all
+			// LED combinations.
+			uint8_t led_val = ((v_new & 0x01) ? 0x1 : 0) |  // UP: Red
+						      ((v_new & 0x04) ? 0x2 : 0) |  // LEFT: Green
+						      ((v_new & 0x08) ? 0x4 : 0) |  // RIGHT: Blue
+						      ((v_new & 0x02) ? 0x2 : 0) |  // DOWN: Green
+						      ((v_new & 0x10) ? 0x7 : 0);   // CENTER: Blue+Green+Red
+			set_rgb_led(led_val);
+			printf("Joystick: UP: %d DOWN: %d LEFT: %d RIGHT: %d CENTER: %d - LED: 0x%02x\n",
+					(v_new >> 0) & 1,
+					(v_new >> 1) & 1,
+					(v_new >> 2) & 1,
+					(v_new >> 3) & 1,
+					(v_new >> 4) & 1,
+					led_val);
 		}
 		v_old = v_new;
 	};

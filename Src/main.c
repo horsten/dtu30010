@@ -4,6 +4,7 @@
 #include "fixedpoint_trig.h"
 #include "bounceball.h"
 #include "joystick.h"
+#include "rgb_led.h"
 
 int main(void)
 {
@@ -15,6 +16,8 @@ int main(void)
 #if 0
 	bounceball();
 #elif 1
+	test_joystick_with_rgb_led();
+#elif 0
 	test_joystick();
 #elif 0
 	window(1,1,60,15,0,"Hello World!");
