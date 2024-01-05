@@ -47,8 +47,8 @@ static void bounce(playfield_t *pf)
 	//b.v.x = (1 << 16) | 0x8000;
 	//b.v.x = (1 << 16) | 0xa000;
 	// Start velocity: 1,1
-	b.v.x = int16_to_fixed32_16(1);
-	b.v.y = int16_to_fixed32_16(1);
+	b.v.x = 0x5a82 >> 1; // sqrt(2)/2 //int16_to_fixed32_16(1);
+	b.v.y = 0x5a82 >> 1; // sqrt(2)/2 //int16_to_fixed32_16(1);
 	while(1) {
 		// Update hit counter
 		gotoxy(pf->xoffset+pf->status_x, pf->xoffset+pf->status_y);
@@ -73,7 +73,7 @@ static void bounce(playfield_t *pf)
 		}
 
 		// Wait for a bit
-		usleep(50000);
+		usleep(80000);
 
 		// Now delete the ball from the old position
 		if (!obscured) {
@@ -88,14 +88,14 @@ static void bounce(playfield_t *pf)
 		newy = round_fixed32_16(b.p.y);
 
 		// Check for collission with walls
-		if (newx<=0 || newx >= pf->xsize-1) {
+		if (newx<0 || newx >= pf->xsize-1) {
 			b.v.x = -b.v.x;
 			update_pos(&b);
 			newx = round_fixed32_16(b.p.x);
 			newy = round_fixed32_16(b.p.y);
 			hits++;
 		}
-		if (newy<=0 || newy >= pf->ysize-1) {
+		if (newy<0 || newy >= pf->ysize-1) {
 			b.v.y = -b.v.y;
 			update_pos(&b);
 			newx = round_fixed32_16(b.p.x);

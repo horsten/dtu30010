@@ -118,7 +118,7 @@ void vector_rotate(vector_t *v, uint16_t degree_base_512)
 void test_fp_sincos(void)
 {
 	fixed16_14_t val;
-	goto part2;
+
 	val = sin_fp(0);
 	printf("sin_fp(0) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
@@ -143,7 +143,6 @@ void test_fp_sincos(void)
 	val = cos_fp(411 /* (649-360)/360*512 */);
 	printf("cos_fp(649 degrees) = %s\n", print_fixed32_16_t(fixed16_14_to_fixed32_16(val)));
 
-	part2:
 	vector_t vec = { int16_to_fixed32_16(1), int16_to_fixed32_16(2) };
 	vector_rotate(&vec, 256 /* 180 degrees: 180/360*512 or 512/2 for short */);
 	printf("vector_rotate(1, 2, 180 degrees): (%s, %s)\n", print_fixed32_16_t(vec.x), print_fixed32_16_t(vec.y));
