@@ -36,12 +36,13 @@ joystick_status_t read_joystick(void)
 	// bit 2: PC1: left
 	// bit 3: PC0: right
 	// bit 4: PB5: center
-	joystick_status_t r = {
-			.up=((GPIOA->IDR >> 4) & 1),
-		   .down=((GPIOB->IDR >> 0) & 1),
-		   .left=((GPIOC->IDR >> 1) & 1),
-		   .right=((GPIOC->IDR >> 0) & 1),
-		   .center=((GPIOB->IDR >> 5) & 1)};
+	joystick_status_t r;
+	r.raw = 0;
+	r.b.up=((GPIOA->IDR >> 4) & 1);
+	r.b.down=((GPIOB->IDR >> 0) & 1);
+	r.b.left=((GPIOC->IDR >> 1) & 1);
+	r.b.right=((GPIOC->IDR >> 0) & 1);
+	r.b.center=((GPIOB->IDR >> 5) & 1);
 	return r;
 }
 
@@ -52,10 +53,10 @@ void test_joystick(void)
 	init_joystick();
 	while(1) {
 		v_new = read_joystick();
-		if (memcmp(&v_new, &v_old, sizeof(joystick_status_t)) || first) {
+		if (v_new.raw == v_old.raw || first) {
 			first=0;
 			printf("Joystick: UP: %d DOWN: %d LEFT: %d RIGHT: %d CENTER: %d\n",
-					v_new.up, v_new.down, v_new.left, v_new.right, v_new.center);
+					v_new.b.up, v_new.b.down, v_new.b.left, v_new.b.right, v_new.b.center);
 		}
 		v_old = v_new;
 	};
@@ -64,25 +65,25 @@ void test_joystick(void)
 void test_joystick_with_rgb_led(void)
 {
 	joystick_status_t v_old, v_new;
-	int first = 1;
+	v_old.raw = 0xff;
 	init_joystick();
 	init_rgb_led();
+	printf("\nJoystick tester. Size of joystick_status_t: %d.\n", sizeof(joystick_status_t));
 	while(1) {
 		v_new = read_joystick();
-		if (memcmp(&v_new, &v_old, sizeof(joystick_status_t)) || first) {
-			first = 0;
+		if (v_new.raw != v_old.raw) {
 			// Set the LED depending on joystick state,
 			// by choosing these values it's possible to get all
 			// LED combinations.
-			uint8_t led_val = (v_new.up ? 0x1 : 0) |  // UP: Red
-						      (v_new.left ? 0x2 : 0) |  // LEFT: Green
-						      (v_new.right ? 0x4 : 0) |  // RIGHT: Blue
-						      (v_new.down ? 0x2 : 0) |  // DOWN: Green
-						      (v_new.center ? 0x7 : 0);   // CENTER: Blue+Green+Red
+			uint8_t led_val = (v_new.b.up ? 0x1 : 0) |  // UP: Red
+						      (v_new.b.left ? 0x2 : 0) |  // LEFT: Green
+						      (v_new.b.right ? 0x4 : 0) |  // RIGHT: Blue
+						      (v_new.b.down ? 0x2 : 0) |  // DOWN: Green
+						      (v_new.b.center ? 0x7 : 0);   // CENTER: Blue+Green+Red
 			set_rgb_led(led_val);
-			printf("Joystick: UP: %d DOWN: %d LEFT: %d RIGHT: %d CENTER: %d - LED: 0x%02x\n",
-					v_new.up, v_new.down, v_new.left, v_new.right, v_new.center, led_val);
+			printf("Joystick: RAW: 0x%02x UP: %d DOWN: %d LEFT: %d RIGHT: %d CENTER: %d - LED: 0x%02x\n",
+					v_new.raw, v_new.b.up, v_new.b.down, v_new.b.left, v_new.b.right, v_new.b.center, led_val);
 		}
-		v_old = v_new;
+		v_old.raw = v_new.raw;
 	};
 }
