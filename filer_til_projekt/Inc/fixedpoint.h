@@ -37,20 +37,15 @@ inline  __attribute__((always_inline)) int16_t round_fixed32_16(fixed32_16_t v)
 // Warning: not reentrant, uses static buffer.
 const char *print_fixed32_16_t(fixed32_16_t i);
 
-fixed16_14_t sin_fp(uint16_t degree_base_512);
-fixed16_14_t cos_fp(uint16_t degree_base_512);
-
-fixed32_16_t sin_fp_32_16(uint16_t degree_base_512);
-fixed32_16_t cos_fp_32_16(uint16_t degree_base_512);
 
 typedef struct {
 	fixed32_16_t x;
 	fixed32_16_t y;
 } vector_t;
 
-void vector_rotate(vector_t *v, uint16_t degree_base_512);
 
-void test_fp_sincos(void);
+
+
 
 
 

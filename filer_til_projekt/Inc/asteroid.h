@@ -16,7 +16,7 @@ typedef struct {
 void asteroid_move(asteroid_t* a);
 void draw_asteroid(asteroid_t* a, uint8_t strtpos);
 void init_asteroid_val(asteroid_t* a);
-void testasto(void);
+void testasto(asteroid_t* a);
 
 
 #endif /* ASTEROID_H_ */

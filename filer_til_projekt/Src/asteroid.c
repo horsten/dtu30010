@@ -9,8 +9,8 @@
 
 
 void init_asteroid_val(asteroid_t* a){
-	a->pos.x = int16_to_fixed32_16(100);
-	a->velocity.x = int16_to_fixed32_16(-1);
+	a->pos.x = 100; //int16_to_fixed32_16(10);
+	a->velocity.x = -1; //int16_to_fixed32_16(-1);
 }
 
 void asteroid_move(asteroid_t* a){
@@ -22,7 +22,7 @@ void draw_asteroid(asteroid_t* a, uint8_t strtposy) {
 	printf("a");
 }
 asteroid_t asteroid;
-void testasto(void){
+void testasto(asteroid_t* a){
 	//asteroid_move(&asteroid);
 	draw_asteroid(&asteroid,10);
 }
