@@ -10,12 +10,14 @@ int main(void)
 {
 
 // Setup communication with the PC
-	uart_init(460800);
+	uart_init(921600);
 	init_term();
 
 #if 0
-	bounceball();
+	test_frame_update();
 #elif 1
+	bounceball();
+#elif 0
 	test_joystick_with_rgb_led();
 #elif 0
 	test_rgb_led();

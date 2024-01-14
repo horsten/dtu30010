@@ -212,17 +212,10 @@ static const window_style_t window_styles[] = {
 		{ .tl=L_TL_D, .tr=L_TR_D, .bl=L_BL_D, .br=L_BR_D, .h=L_H_D, .v=L_V_D, .fgcol=0, .bgcol=7, .no_title=1 },
 		{ .tl=L_TL, .tr=L_TR, .bl=L_BL, .br=L_BR, .h=L_H, .v=L_V, .fgcol=15, .bgcol=4, .no_title=1 }
 };
-
-void window(uint16_t x1, uint16_t y1, uint16_t width, uint16_t height, uint8_t style, const char *title)
+static void window1(uint16_t x1, uint16_t y1, uint16_t width, uint16_t height, const window_style_t *st, const char *title)
 {
 	char *titlebuf = NULL;
 	int title_len;
-	const window_style_t *st;
-	if (style<sizeof(window_styles)/sizeof(window_style_t)) {
-		st = &window_styles[style];
-	} else {
-		st = &window_styles[0];
-	}
 
 	if (st->no_title) {
 		title_len = 0;
@@ -271,4 +264,30 @@ void window(uint16_t x1, uint16_t y1, uint16_t width, uint16_t height, uint8_t s
 		printf(st->h);
 	}
 	printf(st->br);
+}
+
+void window(uint16_t x1, uint16_t y1, uint16_t width, uint16_t height, uint8_t style, const char *title)
+{
+	const window_style_t *st;
+	if (style<sizeof(window_styles)/sizeof(window_style_t)) {
+		st = &window_styles[style];
+	} else {
+		st = &window_styles[0];
+	}
+	window1(x1, y1, width, height, st, title);
+}
+
+void test_frame_update(void)
+{
+	const terminfo_t *ti = get_terminfo();
+	window_style_t st;
+	int updates=0;
+	memcpy(&st, &window_styles[2], sizeof(window_style_t));
+	for(;;) {
+		window1(1,1,ti->x_size-2, ti->y_size-2,&st,"TEST");
+		st.bgcol = (st.bgcol+1)%8;
+		gotoxy(40,0);
+		color(0,7);
+		printf("Updates: %6d", updates++);
+	}
 }

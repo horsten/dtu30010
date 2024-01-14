@@ -22,5 +22,6 @@ void blink(uint8_t on);
 void inverse(uint8_t on);
 void resetbgcolor(void);
 void window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint8_t style, const char *title);
+void test_frame_update(void);
 
 #endif
